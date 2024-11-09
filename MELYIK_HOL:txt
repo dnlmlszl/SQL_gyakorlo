@@ -1,0 +1,22 @@
+1.
+
+SELECT melyik_hol.a_id
+FROM melyik_hol
+WHERE melyik_hol.r_id = 1;
+
+2.
+
+SELECT anyag.nev
+FROM anyag
+INNER JOIN melyik_hol
+ON anyag.id = melyik_hol.a_id
+WHERE melyik_hol.r_id = 1;
+
+3.
+
+SELECT anyag.nev, rendeles.termek
+FROM anyag
+INNER JOIN melyik_hol
+ON anyag.id = melyik_hol.a_id
+INNER JOIN rendeles
+ON melyik_hol.r_id = rendeles.id;
