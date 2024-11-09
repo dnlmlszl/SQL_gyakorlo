@@ -1,0 +1,9 @@
+CREATE TABLE `rendeles` 
+( 
+  `id` int(11) NOT NULL AUTO_INCREMENT, 
+  `termek` varchar(10) NOT NULL, 
+  `db` tinyint(4) NOT NULL, 
+  `teljesitve` tinyint(1) NOT NULL DEFAULT 0, 
+  PRIMARY KEY (`id`) 
+  ) 
+  ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci; 1 t1 55 0 2 t2 25 0
