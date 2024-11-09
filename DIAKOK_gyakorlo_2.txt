@@ -1,0 +1,108 @@
+1.
+SELECT nev
+FROM diakok;
+
+2.
+SELECT diakok.nev,diakok.osztaly, tanarok.nev
+FROM diakok, tanarok;
+
+3.
+SELECT osztaly, COUNT(osztaly)
+FROM diakok
+GROUP BY osztaly;
+
+4.
+SELECT osztaly, COUNT(osztaly)
+FROM diakok
+WHERE osztaly LIKE '%A'
+GROUP BY osztaly;
+
+5.
+SELECT osztaly, COUNT(osztaly)
+FROM diakok
+WHERE osztaly LIKE '___'
+GROUP BY osztaly;
+
+SELECT osztaly, COUNT(osztaly)
+FROM diakok
+WHERE osztaly LIKE < 10
+GROUP BY osztaly;
+
+SELECT osztaly, COUNT(osztaly) AS letszam
+FROM diakok
+GROUP BY osztaly
+HAVING letszam > 2;
+
+SELECT osztaly, COUNT(osztaly) AS letszam
+FROM diakok
+WHERE osztaly LIKE '___'
+GROUP BY osztaly
+HAVING letszam < 3;
+
+SELECT osztaly, COUNT(osztaly) AS letszam
+FROM diakok
+GROUP BY osztaly
+HAVING letszam < 3
+ORDER BY osztaly DESC;
+
+SELECT osztaly, COUNT(osztaly) AS letszam
+FROM diakok
+GROUP BY osztaly
+ORDER BY osztaly ASC
+LIMIT 1;
+
+6.
+SELECT diakok.nev, diakok.osztaly, tanarok.nev
+FROM diakok, tanarok
+WHERE diakok.osztaly = tanarok.osztaly;
+
+SELECT diakok.nev, diakok.osztaly, tanarok.nev
+FROM diakok
+INNER JOIN tanarok
+ON diakok.osztaly=tanarok.osztaly
+
+SELECT diakok.nev, diakok.osztaly, tanarok.nev
+FROM diakok
+LEFT JOIN tanarok
+ON diakok.osztaly=tanarok.osztaly;
+
+SELECT diakok.nev AS diak_neve, diakok.osztaly, tanarok.nev AS ofo
+FROM diakok
+RIGHT JOIN tanarok
+ON diakok.osztaly=tanarok.osztaly;
+
+SELECT diakok.nev AS diak_neve, diakok.osztaly, tanarok.nev AS ofo
+FROM diakok
+CROSS JOIN tanarok
+ON diakok.osztaly=tanarok.osztaly;
+
+7.
+
+SELECT diakok.osztaly, COUNT(diakok.osztaly) AS letszam
+FROM diakok
+GROUP BY diakok.osztaly
+HAVING COUNT(diakok.osztaly) = (
+    SELECT MIN(osztaly_letszam)
+    FROM (SELECT COUNT(diakok.osztaly) AS osztaly_letszam
+          FROM diakok
+          GROUP BY diakok.osztaly) AS subquery
+)
+ORDER BY diakok.osztaly DESC;
+
+SELECT t.nev AS tanar_neve, d.osztaly, COUNT(d.id) ASdiakok_szama
+FROM diakok d
+JOIN tanarok t ON d.osztaly = t.osztaly
+GROUP BY t.nev, d.osztaly
+ORDER BY t.nev, d.osztaly;
+
+SELECT t.nev AS tanar_neve, d.osztaly, COUNT(d.id) AS diakok_szama
+FROM diakok d
+RIGHT JOIN tanarok t ON d.osztaly = t.osztaly
+GROUP BY t.nev, d.osztaly
+ORDER BY t.nev, d.osztaly;
+
+SELECT t.nev AS tanar_neve, d.osztaly, COUNT(d.id) AS diakok_szama
+FROM diakok d
+LEFT JOIN tanarok t ON d.osztaly = t.osztaly
+GROUP BY t.nev, d.osztaly
+ORDER BY t.nev, d.osztaly;
